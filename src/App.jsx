@@ -177,11 +177,11 @@ function App() {
             <div className="relative">
               {/* 12 Pétales d'Ashaya - Cercle subtil autour du Om */}
               <motion.div
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0"
                 initial={{ opacity: 0 }}
                 animate={{
-                  opacity: isHoveringHeart ? 0.3 : 0,
-                  scale: isHoveringHeart ? 1 : 0.95
+                  opacity: isHoveringHeart ? 0.5 : 0.2,
+                  scale: isHoveringHeart ? 1 : 0.98
                 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
               >
@@ -235,26 +235,38 @@ function App() {
                           ry="15"
                           fill="url(#petalGradient)"
                           stroke="#D4AF37"
-                          strokeWidth={isHovered ? "0.8" : "0.3"}
-                          opacity={isHovered ? "0.8" : "0.4"}
+                          strokeWidth={isService ? (isHovered ? "1.2" : "0.6") : "0.3"}
+                          opacity={isService ? (isHovered ? "0.9" : "0.6") : "0.4"}
                           transform={`rotate(${petal.angle} ${x} ${y})`}
                           style={{ transition: 'all 0.3s ease' }}
                         />
 
-                        {/* Nom de la qualité (très subtil) */}
+                        {/* Nom de la qualité */}
                         <text
                           x={x}
                           y={y + 25}
-                          fontSize={isHovered ? "5" : "4"}
+                          fontSize={isService ? (isHovered ? "6" : "5") : "4"}
                           fill="#D4AF37"
-                          opacity={isHovered ? "0.9" : "0.5"}
+                          opacity={isService ? (isHovered ? "1" : "0.8") : "0.5"}
                           textAnchor="middle"
                           fontFamily="serif"
-                          fontWeight={isHovered ? "400" : "300"}
+                          fontWeight={isService ? (isHovered ? "500" : "400") : "300"}
                           style={{ transition: 'all 0.3s ease' }}
                         >
                           {petal.name}
                         </text>
+
+                        {/* Indicateur cliquable pour Service */}
+                        {isService && (
+                          <circle
+                            cx={x}
+                            cy={y}
+                            r={isHovered ? "3" : "2"}
+                            fill="#D4AF37"
+                            opacity={isHovered ? "0.8" : "0.5"}
+                            style={{ transition: 'all 0.3s ease' }}
+                          />
+                        )}
                       </g>
                     );
                   })}
@@ -685,6 +697,21 @@ function App() {
               </svg>
             </motion.div> */}
           </motion.div>
+
+          {/* Guide subtil - Apparaît quand les pétales sont visibles */}
+          {isHoveringHeart && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 0.6, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 1, delay: 1 }}
+              className="fixed bottom-8 left-1/2 -translate-x-1/2 pointer-events-none"
+            >
+              <p className="text-xs text-bindu-or/60 text-center">
+                Cliquez sur le pétale <span className="font-light text-bindu-or">Service</span> pour contempler
+              </p>
+            </motion.div>
+          )}
         </motion.div>
       </VitruvianGeometry>
     </div>
