@@ -598,18 +598,12 @@ function App() {
               className="relative w-16 h-20"
               initial={{ opacity: 0 }}
               animate={{
-                opacity: isHoveringHeart ? 1 : [0, 1, 1, 1, 1, 0.9, 0.7, 0.5]
+                opacity: isHoveringHeart ? 1 : 0.9
               }}
               transition={{
-                opacity: isHoveringHeart ? {
-                  duration: 0.8,
-                  ease: "easeOut"
-                } : {
-                  duration: 8,
-                  times: [0, 0.1, 0.6, 0.7, 0.8, 0.85, 0.9, 1],
-                  ease: "easeInOut",
-                  delay: 6.5
-                }
+                duration: 1,
+                ease: "easeOut",
+                delay: 6.5
               }}
             >
               {/* Flamme */}
