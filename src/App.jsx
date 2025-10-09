@@ -283,7 +283,7 @@ function App() {
             </div>
           </motion.div> */}
 
-          {/* Cœur embryonnaire (💓) - Premier bindu vivant - Métaphore Kali Yuga */}
+          {/* Dīpa Pātra (🪔) - Flamme sacrée Śaktipāt - Hṛidaya */}
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{
@@ -298,22 +298,12 @@ function App() {
             }}
             className="absolute top-[42%] left-1/2 -translate-x-1/2"
           >
-            {/* Cœur embryonnaire - Kali Yuga : fade-out progressif 7-8s, réapparaît au survol */}
+            {/* Dīpa Pātra - Coupe au ghee avec flamme */}
             <motion.div
-              className="relative w-8 h-8 rounded-full bg-[#DC143C] shadow-md"
+              className="relative w-16 h-20"
               initial={{ opacity: 0 }}
               animate={{
-                opacity: isHoveringHeart ? 1 : [0, 1, 1, 1, 1, 0.7, 0.4, 0],
-                scale: isHoveringHeart ? [1, 1.15, 1] : [1, 1.15, 1],
-                boxShadow: isHoveringHeart ? [
-                  '0 0 8px rgba(220, 20, 60, 0.4)',
-                  '0 0 18px rgba(220, 20, 60, 0.6)',
-                  '0 0 8px rgba(220, 20, 60, 0.4)',
-                ] : [
-                  '0 0 8px rgba(220, 20, 60, 0.4)',
-                  '0 0 18px rgba(220, 20, 60, 0.6)',
-                  '0 0 8px rgba(220, 20, 60, 0.4)',
-                ]
+                opacity: isHoveringHeart ? 1 : [0, 1, 1, 1, 1, 0.9, 0.7, 0.5]
               }}
               transition={{
                 opacity: isHoveringHeart ? {
@@ -324,21 +314,91 @@ function App() {
                   times: [0, 0.1, 0.6, 0.7, 0.8, 0.85, 0.9, 1],
                   ease: "easeInOut",
                   delay: 6.5
-                },
-                scale: {
-                  duration: isHoveringHeart ? 2 : 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 6.5
-                },
-                boxShadow: {
-                  duration: isHoveringHeart ? 2 : 2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                  delay: 6.5
                 }
               }}
-            />
+            >
+              {/* Flamme */}
+              <motion.div
+                className="absolute top-0 left-1/2 -translate-x-1/2 w-6 h-12"
+                animate={{
+                  scale: isHoveringHeart ? [1, 1.2, 1.1, 1.15, 1] : [1, 1.08, 1.05, 1.08, 1],
+                  y: isHoveringHeart ? [0, -2, 0, -1, 0] : [0, -1, 0, -0.5, 0]
+                }}
+                transition={{
+                  duration: isHoveringHeart ? 2 : 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                {/* Flamme intérieure (jaune-or) */}
+                <div className="absolute inset-x-2 top-2 bottom-3">
+                  <div className="w-full h-full bg-gradient-to-t from-[#FFD700] via-[#FFA500] to-[#FF8C00] rounded-t-full"
+                       style={{ filter: 'blur(2px)' }} />
+                </div>
+
+                {/* Flamme extérieure (orange-rouge) */}
+                <motion.div
+                  className="absolute inset-0"
+                  animate={{
+                    opacity: [0.6, 0.8, 0.7, 0.75, 0.6]
+                  }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                >
+                  <div className="w-full h-full bg-gradient-to-t from-[#FF6347] via-[#FF4500] to-transparent rounded-t-full opacity-80"
+                       style={{ filter: 'blur(3px)' }} />
+                </motion.div>
+
+                {/* Pointe de flamme (blanche lumineuse) */}
+                <motion.div
+                  className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-3 bg-white rounded-full"
+                  animate={{
+                    opacity: isHoveringHeart ? [0.9, 1, 0.9] : [0.6, 0.8, 0.6],
+                    scale: isHoveringHeart ? [1, 1.3, 1] : [1, 1.1, 1]
+                  }}
+                  transition={{
+                    duration: 1.5,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                  style={{ filter: 'blur(1px)', boxShadow: '0 0 8px rgba(255, 255, 255, 0.8)' }}
+                />
+              </motion.div>
+
+              {/* Coupe (Pātra) */}
+              <motion.div
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 w-12 h-8"
+                animate={{
+                  boxShadow: isHoveringHeart ? [
+                    '0 2px 6px rgba(184, 134, 11, 0.3)',
+                    '0 4px 12px rgba(184, 134, 11, 0.5)',
+                    '0 2px 6px rgba(184, 134, 11, 0.3)',
+                  ] : [
+                    '0 2px 4px rgba(184, 134, 11, 0.2)',
+                    '0 2px 6px rgba(184, 134, 11, 0.3)',
+                    '0 2px 4px rgba(184, 134, 11, 0.2)',
+                  ]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut"
+                }}
+              >
+                {/* Corps de la coupe (laiton/bronze) */}
+                <div className="w-full h-full rounded-b-full bg-gradient-to-b from-[#B8860B] via-[#CD853F] to-[#8B4513]"
+                     style={{ clipPath: 'ellipse(50% 40% at 50% 60%)' }} />
+
+                {/* Bord supérieur de la coupe */}
+                <div className="absolute top-0 w-full h-2 rounded-full bg-gradient-to-r from-[#DAA520] via-[#FFD700] to-[#DAA520]" />
+
+                {/* Reflet sur la coupe */}
+                <div className="absolute top-1 left-2 w-4 h-2 bg-white/30 rounded-full blur-sm" />
+              </motion.div>
+            </motion.div>
           </motion.div>
 
           {/* Bindu Terrestre (🌍) - Bas */}
