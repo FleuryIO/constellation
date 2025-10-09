@@ -185,9 +185,9 @@ function App() {
               </div>
             </motion.div>
 
-            {/* Om Symbol - Centre avec 12 pétales d'Ashaya */}
+            {/* Om Symbol - Centre avec structure traditionnelle */}
             <div className="relative">
-              {/* 12 Pétales d'Ashaya - Visibles dès le chargement */}
+              {/* Structure complète : 8 pétales intérieurs (Maître) + 12 pétales extérieurs (Ashaya) */}
               <motion.div
                 className="absolute inset-0"
                 initial={{ opacity: 0 }}
@@ -197,7 +197,7 @@ function App() {
                 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
               >
-                {/* Cercle de base pour les pétales */}
+                {/* SVG pour tous les pétales */}
                 <svg
                   viewBox="0 0 200 200"
                   className="w-64 h-64 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
@@ -208,24 +208,132 @@ function App() {
                       <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.2"/>
                       <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.05"/>
                     </radialGradient>
+                    <radialGradient id="petalGradientMaster">
+                      <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.3"/>
+                      <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.1"/>
+                    </radialGradient>
                   </defs>
 
-                  {/* 12 pétales positionnés en cercle */}
+                  {/* 8 Pétales intérieurs - Aṣṭa Śakti du Maître */}
                   {[
-                    { angle: 0, name: "Clarté" },      // Est
+                    { angle: 0, name: "Vāsanā", fonction: "Désir de Vérité" },      // Est
+                    { angle: 45, name: "Vidyā", fonction: "Connaissance intérieure" },
+                    { angle: 90, name: "Prāṇa", fonction: "Vie subtile" },          // Nord
+                    { angle: 135, name: "Kriyā", fonction: "Action juste" },
+                    { angle: 180, name: "Icchā", fonction: "Volonté divine" },      // Ouest
+                    { angle: 225, name: "Jñāna", fonction: "Vision du Réel" },
+                    { angle: 270, name: "Karuṇā", fonction: "Compassion universelle" }, // Sud
+                    { angle: 315, name: "Śānti", fonction: "Paix inébranlable" }
+                  ].map((petal, i) => {
+                    const radius = 45; // Plus proche du centre
+                    const x = 100 + radius * Math.cos((petal.angle - 90) * Math.PI / 180);
+                    const y = 100 + radius * Math.sin((petal.angle - 90) * Math.PI / 180);
+
+                    return (
+                      <g key={`master-${i}`}>
+                        {/* Pétale du Maître (forme plus arrondie) */}
+                        <ellipse
+                          cx={x}
+                          cy={y}
+                          rx="6"
+                          ry="12"
+                          fill="url(#petalGradientMaster)"
+                          stroke="#D4AF37"
+                          strokeWidth="0.5"
+                          opacity="0.6"
+                          transform={`rotate(${petal.angle} ${x} ${y})`}
+                        />
+
+                        {/* Nom sanskrit (très subtil) */}
+                        <text
+                          x={x}
+                          y={y + 18}
+                          fontSize="3.5"
+                          fill="#D4AF37"
+                          opacity="0.5"
+                          textAnchor="middle"
+                          fontFamily="serif"
+                          fontWeight="300"
+                          fontStyle="italic"
+                        >
+                          {petal.name}
+                        </text>
+                      </g>
+                    );
+                  })}
+
+                  {/* 16 pétales extérieurs - Ṣoḍaśa Nityā Śakti du Maître */}
+                  {[
+                    { angle: 0, name: "Kāmā", aspect: "Désir sacré" },
+                    { angle: 22.5, name: "Buddhyā", aspect: "Intelligence éveillée" },
+                    { angle: 45, name: "Ahaṅkārā", aspect: "Je Suis divin" },
+                    { angle: 67.5, name: "Śabdā", aspect: "Parole vivante" },
+                    { angle: 90, name: "Sparśā", aspect: "Contact subtil" },
+                    { angle: 112.5, name: "Rūpā", aspect: "Forme lumineuse" },
+                    { angle: 135, name: "Rasā", aspect: "Saveur du Réel" },
+                    { angle: 157.5, name: "Gandhā", aspect: "Parfum de grâce" },
+                    { angle: 180, name: "Cittā", aspect: "Conscience pure" },
+                    { angle: 202.5, name: "Dhṛtī", aspect: "Stabilité ferme" },
+                    { angle: 225, name: "Smṛtī", aspect: "Mémoire sacrée" },
+                    { angle: 247.5, name: "Nāmā", aspect: "Nom divin" },
+                    { angle: 270, name: "Bīja", aspect: "Semence mantra" },
+                    { angle: 292.5, name: "Ātmā", aspect: "Soi universel" },
+                    { angle: 315, name: "Amṛtā", aspect: "Nectar immortel" },
+                    { angle: 337.5, name: "Śarīrā", aspect: "Corps de lumière" }
+                  ].map((petal, i) => {
+                    const radius = 58; // Entre les 8 intérieurs et les 12 Ashaya
+                    const x = 100 + radius * Math.cos((petal.angle - 90) * Math.PI / 180);
+                    const y = 100 + radius * Math.sin((petal.angle - 90) * Math.PI / 180);
+
+                    return (
+                      <g key={`nityā-${i}`}>
+                        {/* Pétale Nityā (Lune, transmission) */}
+                        <ellipse
+                          cx={x}
+                          cy={y}
+                          rx="5"
+                          ry="10"
+                          fill="url(#petalGradientMaster)"
+                          stroke="#D4AF37"
+                          strokeWidth="0.4"
+                          opacity="0.5"
+                          transform={`rotate(${petal.angle} ${x} ${y})`}
+                        />
+
+                        {/* Nom sanskrit (très subtil) */}
+                        <text
+                          x={x}
+                          y={y + 15}
+                          fontSize="3"
+                          fill="#D4AF37"
+                          opacity="0.4"
+                          textAnchor="middle"
+                          fontFamily="serif"
+                          fontWeight="300"
+                          fontStyle="italic"
+                        >
+                          {petal.name}
+                        </text>
+                      </g>
+                    );
+                  })}
+
+                  {/* 12 pétales ASHAYA - Votre pratique personnelle (plus extérieurs) */}
+                  {[
+                    { angle: 0, name: "Clarté" },
                     { angle: 30, name: "Connaissance" },
-                    { angle: 60, name: "Silence" },    // Nord-Est
-                    { angle: 90, name: "Foi" },        // Nord
-                    { angle: 120, name: "Vérité" },    // Nord-Ouest
+                    { angle: 60, name: "Silence" },
+                    { angle: 90, name: "Foi" },
+                    { angle: 120, name: "Vérité" },
                     { angle: 150, name: "Compassion" },
-                    { angle: 180, name: "Douceur" },   // Ouest
+                    { angle: 180, name: "Douceur" },
                     { angle: 210, name: "Humilité" },
-                    { angle: 240, name: "Présence" },  // Sud-Ouest
-                    { angle: 270, name: "Gratitude" }, // Sud
-                    { angle: 300, name: "Service" },   // Sud-Est
+                    { angle: 240, name: "Présence" },
+                    { angle: 270, name: "Gratitude" },
+                    { angle: 300, name: "Service" },   // Cliquable
                     { angle: 330, name: "Joie" }
                   ].map((petal, i) => {
-                    const radius = 70;
+                    const radius = 75; // Plus loin - pratique personnelle
                     const x = 100 + radius * Math.cos((petal.angle - 90) * Math.PI / 180);
                     const y = 100 + radius * Math.sin((petal.angle - 90) * Math.PI / 180);
                     const isService = petal.name === "Service";
@@ -233,13 +341,13 @@ function App() {
 
                     return (
                       <g
-                        key={i}
+                        key={`ashaya-${i}`}
                         style={{ cursor: isService ? 'pointer' : 'default' }}
                         onClick={isService ? () => setShowParamiShakti(true) : undefined}
                         onMouseEnter={isService ? () => setHoveredPetal(petal.name) : undefined}
                         onMouseLeave={isService ? () => setHoveredPetal(null) : undefined}
                       >
-                        {/* Pétale (forme de feuille) */}
+                        {/* Pétale Ashaya */}
                         <ellipse
                           cx={x}
                           cy={y}
@@ -268,10 +376,9 @@ function App() {
                           {petal.name}
                         </text>
 
-                        {/* Indicateur cliquable pour Service - TOUJOURS visible */}
+                        {/* Indicateur cliquable pour Service */}
                         {isService && (
                           <>
-                            {/* Point central */}
                             <circle
                               cx={x}
                               cy={y}
@@ -280,7 +387,6 @@ function App() {
                               opacity={isHovered ? "0.9" : "0.7"}
                               style={{ transition: 'all 0.3s ease' }}
                             />
-                            {/* Anneau pulsant */}
                             <circle
                               cx={x}
                               cy={y}
@@ -289,7 +395,6 @@ function App() {
                               stroke="#D4AF37"
                               strokeWidth="0.5"
                               opacity={isHovered ? "0.8" : "0.4"}
-                              style={{ transition: 'all 0.3s ease' }}
                             >
                               <animate
                                 attributeName="r"
@@ -310,11 +415,34 @@ function App() {
                     );
                   })}
 
-                  {/* Cercle central subtil reliant les pétales */}
+                  {/* Cercles concentriques - Structure sacrée complète */}
+                  {/* Cercle 1 - 8 Aṣṭa Śakti (rayonnement intérieur) */}
                   <circle
                     cx="100"
                     cy="100"
-                    r="70"
+                    r="45"
+                    fill="none"
+                    stroke="#D4AF37"
+                    strokeWidth="0.3"
+                    opacity="0.25"
+                  />
+
+                  {/* Cercle 2 - 16 Ṣoḍaśa Nityā (transmission Lune) */}
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="58"
+                    fill="none"
+                    stroke="#D4AF37"
+                    strokeWidth="0.25"
+                    opacity="0.2"
+                  />
+
+                  {/* Cercle 3 - 12 Ashaya (pratique personnelle) */}
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="75"
                     fill="none"
                     stroke="#D4AF37"
                     strokeWidth="0.2"
