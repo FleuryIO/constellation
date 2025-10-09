@@ -67,6 +67,18 @@ function App() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-8 relative">
+      {/* Guide permanent - Chemin vers la musique */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 0.5, y: 0 }}
+        transition={{ duration: 1, delay: 8 }}
+        className="fixed top-6 left-1/2 -translate-x-1/2 z-30 pointer-events-none"
+      >
+        <p className="text-xs text-bindu-or/70 text-center bg-black/40 px-4 py-2 rounded-full backdrop-blur-sm border border-bindu-or/20">
+          Pétale <span className="font-semibold text-bindu-or">Service</span> (Sud-Est) → Contempler → Musique
+        </p>
+      </motion.div>
+
       {/* Pāramī-Śakti Modal - Contemplation avant musique */}
       <ParamiShakti
         isVisible={showParamiShakti}
@@ -175,13 +187,13 @@ function App() {
 
             {/* Om Symbol - Centre avec 12 pétales d'Ashaya */}
             <div className="relative">
-              {/* 12 Pétales d'Ashaya - Cercle subtil autour du Om */}
+              {/* 12 Pétales d'Ashaya - Visibles dès le chargement */}
               <motion.div
                 className="absolute inset-0"
                 initial={{ opacity: 0 }}
                 animate={{
-                  opacity: isHoveringHeart ? 0.5 : 0.2,
-                  scale: isHoveringHeart ? 1 : 0.98
+                  opacity: isHoveringHeart ? 0.7 : 0.4,
+                  scale: isHoveringHeart ? 1.02 : 1
                 }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
               >
@@ -231,12 +243,12 @@ function App() {
                         <ellipse
                           cx={x}
                           cy={y}
-                          rx="8"
-                          ry="15"
+                          rx={isService ? (isHovered ? "10" : "9") : "8"}
+                          ry={isService ? (isHovered ? "18" : "16") : "15"}
                           fill="url(#petalGradient)"
                           stroke="#D4AF37"
-                          strokeWidth={isService ? (isHovered ? "1.2" : "0.6") : "0.3"}
-                          opacity={isService ? (isHovered ? "0.9" : "0.6") : "0.4"}
+                          strokeWidth={isService ? (isHovered ? "1.5" : "1") : "0.4"}
+                          opacity={isService ? (isHovered ? "1" : "0.8") : "0.5"}
                           transform={`rotate(${petal.angle} ${x} ${y})`}
                           style={{ transition: 'all 0.3s ease' }}
                         />
@@ -244,28 +256,55 @@ function App() {
                         {/* Nom de la qualité */}
                         <text
                           x={x}
-                          y={y + 25}
-                          fontSize={isService ? (isHovered ? "6" : "5") : "4"}
+                          y={y + (isService ? 28 : 25)}
+                          fontSize={isService ? (isHovered ? "7" : "6") : "4"}
                           fill="#D4AF37"
-                          opacity={isService ? (isHovered ? "1" : "0.8") : "0.5"}
+                          opacity={isService ? (isHovered ? "1" : "0.95") : "0.6"}
                           textAnchor="middle"
                           fontFamily="serif"
-                          fontWeight={isService ? (isHovered ? "500" : "400") : "300"}
+                          fontWeight={isService ? (isHovered ? "600" : "500") : "300"}
                           style={{ transition: 'all 0.3s ease' }}
                         >
                           {petal.name}
                         </text>
 
-                        {/* Indicateur cliquable pour Service */}
+                        {/* Indicateur cliquable pour Service - TOUJOURS visible */}
                         {isService && (
-                          <circle
-                            cx={x}
-                            cy={y}
-                            r={isHovered ? "3" : "2"}
-                            fill="#D4AF37"
-                            opacity={isHovered ? "0.8" : "0.5"}
-                            style={{ transition: 'all 0.3s ease' }}
-                          />
+                          <>
+                            {/* Point central */}
+                            <circle
+                              cx={x}
+                              cy={y}
+                              r={isHovered ? "4" : "3"}
+                              fill="#D4AF37"
+                              opacity={isHovered ? "0.9" : "0.7"}
+                              style={{ transition: 'all 0.3s ease' }}
+                            />
+                            {/* Anneau pulsant */}
+                            <circle
+                              cx={x}
+                              cy={y}
+                              r="5"
+                              fill="none"
+                              stroke="#D4AF37"
+                              strokeWidth="0.5"
+                              opacity={isHovered ? "0.8" : "0.4"}
+                              style={{ transition: 'all 0.3s ease' }}
+                            >
+                              <animate
+                                attributeName="r"
+                                values="5;8;5"
+                                dur="3s"
+                                repeatCount="indefinite"
+                              />
+                              <animate
+                                attributeName="opacity"
+                                values="0.4;0.1;0.4"
+                                dur="3s"
+                                repeatCount="indefinite"
+                              />
+                            </circle>
+                          </>
                         )}
                       </g>
                     );
