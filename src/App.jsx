@@ -4,6 +4,7 @@ import VitruvianGeometry from './components/VitruvianGeometry'
 import OmSymbol from './components/OmSymbol'
 import Bindu from './components/Bindu'
 import MusicPlayer from './components/MusicPlayer'
+import ParamiShakti from './components/ParamiShakti'
 
 // Citations spirituelles
 const citations = [
@@ -36,6 +37,8 @@ function App() {
   const [isHoveringHeart, setIsHoveringHeart] = useState(false)
   const [debugTime, setDebugTime] = useState(0)
   const [showMusicPlayer, setShowMusicPlayer] = useState(false)
+  const [showParamiShakti, setShowParamiShakti] = useState(false)
+  const [hoveredPetal, setHoveredPetal] = useState(null)
 
   // Charger intention depuis localStorage au montage
   useEffect(() => {
@@ -64,22 +67,14 @@ function App() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-8 relative">
-      {/* Bouton Musique - En haut à droite, subtil */}
-      <motion.button
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 0.6, x: 0 }}
-        whileHover={{ opacity: 1, scale: 1.05 }}
-        transition={{ duration: 0.3 }}
-        onClick={() => setShowMusicPlayer(true)}
-        className="fixed top-8 right-8 z-40 bg-gray-900/50 border border-bindu-or/30 rounded-full p-3 hover:bg-gray-900/70 hover:border-bindu-or/50 transition-all backdrop-blur-sm"
-        title="Musique pour Sādhana"
-      >
-        <svg className="w-6 h-6 text-bindu-or/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-        </svg>
-      </motion.button>
+      {/* Pāramī-Śakti Modal - Contemplation avant musique */}
+      <ParamiShakti
+        isVisible={showParamiShakti}
+        onClose={() => setShowParamiShakti(false)}
+        onOpenMusic={() => setShowMusicPlayer(true)}
+      />
 
-      {/* Music Player Modal */}
+      {/* Music Player Modal - Accessible après contemplation */}
       <MusicPlayer
         isVisible={showMusicPlayer}
         onClose={() => setShowMusicPlayer(false)}
@@ -221,9 +216,17 @@ function App() {
                     const radius = 70;
                     const x = 100 + radius * Math.cos((petal.angle - 90) * Math.PI / 180);
                     const y = 100 + radius * Math.sin((petal.angle - 90) * Math.PI / 180);
+                    const isService = petal.name === "Service";
+                    const isHovered = hoveredPetal === petal.name;
 
                     return (
-                      <g key={i}>
+                      <g
+                        key={i}
+                        style={{ cursor: isService ? 'pointer' : 'default' }}
+                        onClick={isService ? () => setShowParamiShakti(true) : undefined}
+                        onMouseEnter={isService ? () => setHoveredPetal(petal.name) : undefined}
+                        onMouseLeave={isService ? () => setHoveredPetal(null) : undefined}
+                      >
                         {/* Pétale (forme de feuille) */}
                         <ellipse
                           cx={x}
@@ -232,21 +235,23 @@ function App() {
                           ry="15"
                           fill="url(#petalGradient)"
                           stroke="#D4AF37"
-                          strokeWidth="0.3"
-                          opacity="0.4"
+                          strokeWidth={isHovered ? "0.8" : "0.3"}
+                          opacity={isHovered ? "0.8" : "0.4"}
                           transform={`rotate(${petal.angle} ${x} ${y})`}
+                          style={{ transition: 'all 0.3s ease' }}
                         />
 
                         {/* Nom de la qualité (très subtil) */}
                         <text
                           x={x}
                           y={y + 25}
-                          fontSize="4"
+                          fontSize={isHovered ? "5" : "4"}
                           fill="#D4AF37"
-                          opacity="0.5"
+                          opacity={isHovered ? "0.9" : "0.5"}
                           textAnchor="middle"
                           fontFamily="serif"
-                          fontWeight="300"
+                          fontWeight={isHovered ? "400" : "300"}
+                          style={{ transition: 'all 0.3s ease' }}
                         >
                           {petal.name}
                         </text>
