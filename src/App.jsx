@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import VitruvianGeometry from './components/VitruvianGeometry'
 import OmSymbol from './components/OmSymbol'
 import Bindu from './components/Bindu'
+import MusicPlayer from './components/MusicPlayer'
 
 // Citations spirituelles
 const citations = [
@@ -34,6 +35,7 @@ function App() {
   const [citationDuJour, setCitationDuJour] = useState('')
   const [isHoveringHeart, setIsHoveringHeart] = useState(false)
   const [debugTime, setDebugTime] = useState(0)
+  const [showMusicPlayer, setShowMusicPlayer] = useState(false)
 
   // Charger intention depuis localStorage au montage
   useEffect(() => {
@@ -62,6 +64,26 @@ function App() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-8 relative">
+      {/* Bouton Musique - En haut à droite, subtil */}
+      <motion.button
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 0.6, x: 0 }}
+        whileHover={{ opacity: 1, scale: 1.05 }}
+        transition={{ duration: 0.3 }}
+        onClick={() => setShowMusicPlayer(true)}
+        className="fixed top-8 right-8 z-40 bg-gray-900/50 border border-bindu-or/30 rounded-full p-3 hover:bg-gray-900/70 hover:border-bindu-or/50 transition-all backdrop-blur-sm"
+        title="Musique pour Sādhana"
+      >
+        <svg className="w-6 h-6 text-bindu-or/70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
+        </svg>
+      </motion.button>
+
+      {/* Music Player Modal */}
+      <MusicPlayer
+        isVisible={showMusicPlayer}
+        onClose={() => setShowMusicPlayer(false)}
+      />
       {/* VERSION ESSENTIELLE : Axes 3D debug retirés pour silence contemplatif */}
       {/* <div className="fixed top-4 left-4 z-50 bg-black/80 text-white p-4 rounded font-mono text-xs">
         <div className="mb-2 font-bold">Axes 3D (Debug)</div>
@@ -156,8 +178,97 @@ function App() {
               </div>
             </motion.div>
 
-            {/* Om Symbol - Centre */}
-            <OmSymbol className="w-48 h-48 mx-auto" />
+            {/* Om Symbol - Centre avec 12 pétales d'Ashaya */}
+            <div className="relative">
+              {/* 12 Pétales d'Ashaya - Cercle subtil autour du Om */}
+              <motion.div
+                className="absolute inset-0 pointer-events-none"
+                initial={{ opacity: 0 }}
+                animate={{
+                  opacity: isHoveringHeart ? 0.3 : 0,
+                  scale: isHoveringHeart ? 1 : 0.95
+                }}
+                transition={{ duration: 1.5, ease: "easeOut" }}
+              >
+                {/* Cercle de base pour les pétales */}
+                <svg
+                  viewBox="0 0 200 200"
+                  className="w-64 h-64 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <radialGradient id="petalGradient">
+                      <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.2"/>
+                      <stop offset="100%" stopColor="#D4AF37" stopOpacity="0.05"/>
+                    </radialGradient>
+                  </defs>
+
+                  {/* 12 pétales positionnés en cercle */}
+                  {[
+                    { angle: 0, name: "Clarté" },      // Est
+                    { angle: 30, name: "Connaissance" },
+                    { angle: 60, name: "Silence" },    // Nord-Est
+                    { angle: 90, name: "Foi" },        // Nord
+                    { angle: 120, name: "Vérité" },    // Nord-Ouest
+                    { angle: 150, name: "Compassion" },
+                    { angle: 180, name: "Douceur" },   // Ouest
+                    { angle: 210, name: "Humilité" },
+                    { angle: 240, name: "Présence" },  // Sud-Ouest
+                    { angle: 270, name: "Gratitude" }, // Sud
+                    { angle: 300, name: "Service" },   // Sud-Est
+                    { angle: 330, name: "Joie" }
+                  ].map((petal, i) => {
+                    const radius = 70;
+                    const x = 100 + radius * Math.cos((petal.angle - 90) * Math.PI / 180);
+                    const y = 100 + radius * Math.sin((petal.angle - 90) * Math.PI / 180);
+
+                    return (
+                      <g key={i}>
+                        {/* Pétale (forme de feuille) */}
+                        <ellipse
+                          cx={x}
+                          cy={y}
+                          rx="8"
+                          ry="15"
+                          fill="url(#petalGradient)"
+                          stroke="#D4AF37"
+                          strokeWidth="0.3"
+                          opacity="0.4"
+                          transform={`rotate(${petal.angle} ${x} ${y})`}
+                        />
+
+                        {/* Nom de la qualité (très subtil) */}
+                        <text
+                          x={x}
+                          y={y + 25}
+                          fontSize="4"
+                          fill="#D4AF37"
+                          opacity="0.5"
+                          textAnchor="middle"
+                          fontFamily="serif"
+                          fontWeight="300"
+                        >
+                          {petal.name}
+                        </text>
+                      </g>
+                    );
+                  })}
+
+                  {/* Cercle central subtil reliant les pétales */}
+                  <circle
+                    cx="100"
+                    cy="100"
+                    r="70"
+                    fill="none"
+                    stroke="#D4AF37"
+                    strokeWidth="0.2"
+                    opacity="0.15"
+                  />
+                </svg>
+              </motion.div>
+
+              <OmSymbol className="w-48 h-48 mx-auto relative z-10" />
+            </div>
           </div>
 
           {/* Bindu Mūlādhāra (🔥) - Racine, premier ancrage */}
