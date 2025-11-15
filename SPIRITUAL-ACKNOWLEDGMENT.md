@@ -12,8 +12,23 @@ Cette reconnaissance spirituelle s'enracine dans l'étude et la contemplation de
 - **La Bhagavad Gita** (भगवद्गीता) - Le chant du Seigneur
 - **La Guru Gita** (गुरु गीता) - Le chant du Guru
 - **Les enseignements du Siddha Maha Yoga**
+- **Les enseignements de Swami Purushottamananda Ji**
 
 Ces enseignements nous guideront certainement vers une compréhension plus profonde, nous permettant de réviser, d'écrire avec plus de clarté et de précision cet hommage, ici et maintenant présent sur et au travers de GitHub et ces repositories.
+
+---
+
+### 🌊 Enseignement : Le Bonheur dans la Tranquillité
+
+**Swami Purushottamananda Ji** nous enseigne :
+
+> *"Do you know when happiness is obtained? We eat some delicious food; hear a melodious song; enjoy an attractive dance. On such occasions the mind becomes tranquil. Happiness is in tranquility. And where is this tranquility? It exists in our own heart. When the mind becomes calm, that happiness just reflects in it, even as the image of the sun fully reflects in clear, still water."*
+
+**OM**
+
+Cet enseignement éclaire notre vision : la technologie doit **servir la tranquillité**, pas la perturber. Comme l'eau claire et immobile permet au soleil de s'y refléter parfaitement, nos outils doivent permettre à l'esprit de rester clair et tranquille, pour que le bonheur puisse s'y refléter naturellement.
+
+**Technology That Shifts Back to the Human** = Technology That Shifts Back to Tranquility.
 
 ### Gratitude envers les Concepts Sacrés
 
@@ -56,8 +71,23 @@ This spiritual acknowledgment is rooted in the study and contemplation of:
 - **The Bhagavad Gita** (भगवद्गीता) - The Song of the Lord
 - **The Guru Gita** (गुरु गीता) - The Song of the Guru
 - **The teachings of Siddha Maha Yoga**
+- **The teachings of Swami Purushottamananda Ji**
 
 These teachings will certainly guide us toward deeper understanding, allowing us to revise and write with greater clarity and precision this homage, here and now present on and through GitHub and these repositories.
+
+---
+
+### 🌊 Teaching: Happiness in Tranquility
+
+**Swami Purushottamananda Ji** teaches us:
+
+> *"Do you know when happiness is obtained? We eat some delicious food; hear a melodious song; enjoy an attractive dance. On such occasions the mind becomes tranquil. Happiness is in tranquility. And where is this tranquility? It exists in our own heart. When the mind becomes calm, that happiness just reflects in it, even as the image of the sun fully reflects in clear, still water."*
+
+**OM**
+
+This teaching illuminates our vision: technology must **serve tranquility**, not disturb it. Like clear, still water allows the sun to reflect perfectly in it, our tools must allow the mind to remain clear and tranquil, so that happiness can naturally reflect within.
+
+**Technology That Shifts Back to the Human** = Technology That Shifts Back to Tranquility.
 
 ### Gratitude to Sacred Concepts
 
